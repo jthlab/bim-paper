@@ -1,0 +1,57 @@
+initialize() {
+    if (exists("slimgui")) {
+        defineConstant("simID", 1);
+    }
+    
+    //defineConstant("pmut", asInteger([L]/2)); // Mutation position
+    initializeTreeSeq();
+    initializeMutationRate([mu]);
+    initializeMutationType("m1", 0.5, "f", 0.0); 
+    initializeMutationType("m3", [h], "f", [s]);
+
+    initializeGenomicElementType("g1", m1, 1); 
+    initializeGenomicElementType("g3", m3, 1); 
+    
+    initializeGenomicElement(g1, 0, asInteger([L]*0.4875)); 
+    initializeGenomicElement(g3, asInteger([L]*0.4875)+1, asInteger([L]*0.5125)); 
+    initializeGenomicElement(g1, asInteger([L]*0.5125)+1, asInteger([L])); 
+    initializeRecombinationRate([r]);
+
+}
+1 {
+    sim.addSubpop("p1", asInteger([Ne]));
+}
+
+1 late(){
+    defineGlobal("bar", 0);
+    //target = sample(p1.genomes, 1);
+    //target.addNewDrawnMutation(m3, pmut);   
+    sim.treeSeqOutput("/scratch/stats_dept_root/stats_dept/enes/slim_" + 
+                      simID + ".trees");
+}
+
+1:[Until] late() {
+    if ([start]<sim.generation){
+        newSize = asInteger(round([rep]^(sim.generation-[start]) * [Ne]));
+        p1.setSubpopulationSize(newSize);
+    }
+
+    m3muts = sim.mutationsOfType(m3);
+    freqs = sum(sim.mutationFrequencies(NULL, m3muts));
+    if ([reset_lost]){
+        if (sim.countOfMutationsOfType(m3) < bar){
+            cat(simID + ": RESTARTING");
+            sim.readFromPopulationFile("/scratch/stats_dept_root/stats_dept/enes/slim_" + 
+                                       simID + ".trees");
+            setSeed(rdunif(1, 0, asInteger(2^62) - 1));
+            defineGlobal("bar", 0);
+        }
+    }
+}
+[Until] late(){
+    m3muts = sim.mutationsOfType(m3);
+    freqs = sum(sim.mutationFrequencies(NULL, m3muts));
+    print(freqs);
+    sim.treeSeqOutput("trees/"+simID+".trees");
+    sim.simulationFinished();
+}

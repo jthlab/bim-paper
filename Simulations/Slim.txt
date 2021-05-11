@@ -1,0 +1,71 @@
+initialize() {
+    if (exists("slimgui")) {
+        defineConstant("simID", 1);
+    }
+    defineConstant("pmut", asInteger([L]/2)); // Mutation position
+    initializeTreeSeq();
+    initializeMutationRate(0);
+    initializeMutationType("m1", 0.5, "f", 0.0); 
+    initializeMutationType("m3", [h], "f", [s]); 
+    initializeGenomicElementType("g1", m1, 1.0); 
+    initializeGenomicElement(g1, 0, asInteger([L])); 
+    initializeRecombinationRate([r]);
+}
+1 {
+    sim.addSubpop("p1", asInteger([Ne]));
+}
+
+1 late(){
+    target = sample(p1.genomes, 1);
+    target.addNewDrawnMutation(m3, pmut);
+    if([extmut]){
+        a = 1;
+        for (i in 1:asInteger([extmut])){
+            cur = 5*i*a;
+            target.addNewDrawnMutation(m3, pmut-cur);
+            a = -1*a;
+        }
+    }
+    
+    sim.treeSeqOutput("/scratch/stats_dept_root/stats_dept/enes/slim_" + 
+                      simID + ".trees");
+}
+
+1:[Until] late() {
+
+    if ([start]<sim.generation){
+        newSize = asInteger(round([rep]^(sim.generation-[start]) * [Ne]));
+        p1.setSubpopulationSize(newSize);
+    }
+    
+    m3muts = sim.mutationsOfType(m3);
+    freqs = sum(sim.mutationFrequencies(NULL, m3muts));
+    if (freqs >= [Freq]){
+        cat(simID + ": Desired Frequency is achieved");
+        sim.treeSeqOutput("trees/"+simID+".trees");
+        sim.simulationFinished();
+        }
+    
+    if ([reset_lost]){
+        if (sim.countOfMutationsOfType(m3) == 0){
+            if (sum(sim.substitutions.mutationType == m3) == 1) {
+                cat(simID + ": FIXED - RESTARTING");
+                sim.readFromPopulationFile("/scratch/stats_dept_root/stats_dept/enes/slim_" +
+                                           simID + ".trees");
+                setSeed(rdunif(1, 0, asInteger(2^62) - 1));
+            } else {
+                cat(simID + ": LOST - RESTARTING");
+                sim.readFromPopulationFile("/scratch/stats_dept_root/stats_dept/enes/slim_" + 
+                                           simID + ".trees");
+                setSeed(rdunif(1, 0, asInteger(2^62) - 1));
+            }
+    }
+    } 
+}
+[Until] late(){
+    m3muts = sim.mutationsOfType(m3);
+    freqs = sum(sim.mutationFrequencies(NULL, m3muts));
+    print(freqs);
+    sim.treeSeqOutput("trees/"+simID+".trees");
+    sim.simulationFinished();
+}
