@@ -53,6 +53,14 @@ They be accessed from [here](1000GenomesProject/gene_scores). Along with
 [the p-values plots](1000GenomesProject/plots). The p-values represent `<tail of the distribution>_<pop_id>_<stat>.jpg`
 1. To compare our beta-splitting paremeters with other selection paper results, we also calculated rank p-values. 
 
+### Highligted Results
+p-values of the genome scan segments around the specified gene:
+<br><img src="1000GenomesProject/genome_scan_plots/multiple_genes_btreeCmedi.jpg" width="800"><br>
+<br><img src="1000GenomesProject/genome_scan_plots/MHCbsfs.jpg" width="800"><br>
+Z scores of the same segments:
+<br><img src="1000GenomesProject/genome_scan_plots/multiple_genes_btreeCmedi_gs.jpg" width="800"><br>
+<br><img src="1000GenomesProject/genome_scan_plots/MHCbsfs_gs.jpg" width="800"><br>
+
 ### How to browse the results?
 1. See [Segmented genome scans notebook](1000GenomesProject/Segmented_genome_scans.ipynb) to plot the genome-scan p-values for our method. You can either 
 specify the gene or the position on genome. 
