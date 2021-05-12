@@ -21,7 +21,7 @@ Slim Simulations
 ----------------
 [Slim](https://messerlab.org/slim/) allows us to simulate sequences under selection. We considered these 3 settings:
 * [Constant effective population size and a single beneficial dominant mutation.](Simulations/Simulation---Constant_Directional_Selection.ipynb)
-* [Constant effective population size and a single beneficial balancing mutation.](Simulations/Simulation---Constant_Balancing_Selection.ipynb)
+* [Constant effective population size with a couple of mutation with heterozygote advantage.](Simulations/Simulation---Constant_Balancing_Selection.ipynb)
 * [Exponentially growing effective population size and a single beneficial dominant mutation.](Simulations/Simulation---Exponential_Growth_Directional_Selection.ipynb)
 * [Exponentially growing effective population size and a couple of mutation with heterozygote advantage.](Simulations/Simulation---Exponential_Growth_Balancing_Selection.ipynb)
 
@@ -48,9 +48,9 @@ This reduces the noise and helps us to understand the length of the region that 
 1. We will estimate the average statistic each of these segments estimated by change point detection. But variance of the average statistic also has
 a autocovariance part because of the linkage disequilibrium. To account this phenomena, we calculate the autocovariance function for each statistic
 population pair. 
-1. Then we took the genome-scan p-values for each segment for a population. Segments are coded as `c<chrno>s<segment_order>`. 
+1. Then we took the genome-scan p-values for each segment for a population. Segments are coded as `p<pop_id>c<chrno>.<segment_order>`. 
 They be accessed from [here](1000GenomesProject/gene_scores). Along with 
-[the p-values plots](1000GenomesProject/plots). The p-values represent `<tail of the distribution>_<pop id>_<stat>.jpg`
+[the p-values plots](1000GenomesProject/plots). The p-values represent `<tail of the distribution>_<pop_id>_<stat>.jpg`
 1. To compare our beta-splitting paremeters with other selection paper results, we also calculated rank p-values. 
 
 ### How to browse the results?
