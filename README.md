@@ -1,7 +1,7 @@
 Results for &beta;-Imbalance (BIM): Detecting natural selection using a probabilistic
 model of tree imbalance
 ====================================================
-* Here is [the paper]() of this work.
+* Here is [the paper](https://www.biorxiv.org/content/10.1101/2021.05.12.443797v1) of this work.
 * If you want to use the software of this paper refer [here](https://github.com/jthlab/bim). 
 * Cite this paper: CITE-NEEDED
 
