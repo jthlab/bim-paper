@@ -19,7 +19,7 @@ These examples demonstrate simple usages of our method.
 
 Slim Simulations
 ----------------
-[Slim](https://messerlab.org/slim/) allows us to simulate sequences under selection. We considered these 3 settings:
+[Slim](https://messerlab.org/slim/) allows us to simulate sequences under selection. We considered these 4 settings:
 * [Constant effective population size and a single beneficial dominant mutation.](Simulations/Simulation---Constant_Directional_Selection.ipynb)
 * [Constant effective population size with a couple of mutation with heterozygote advantage.](Simulations/Simulation---Constant_Balancing_Selection.ipynb)
 * [Exponentially growing effective population size and a single beneficial dominant mutation.](Simulations/Simulation---Exponential_Growth_Directional_Selection.ipynb)
