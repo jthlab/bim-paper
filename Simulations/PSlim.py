@@ -275,10 +275,11 @@ class Experiment:
         
         return msgs
     
-    def merge_outs(self, setid):
+    def merge_outs(self, setid, name = None):
         outs = self.outs[setid]
         
-        name = self.df[setid]
+        if name is None:
+            name = self.df[setid]
         df = pd.concat([pd.read_csv(out, comment = '#') for out in outs]).reset_index(drop = True)      
         
         dfr = df[[i[0] == 'r' for i in df['path']]].copy()
