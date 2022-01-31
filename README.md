@@ -1,6 +1,6 @@
 Results for &beta;-Imbalance (BIM): Robust detection of natural selection using a probabilistic model of tree imbalance
 ====================================================
-* Here is [the paper](https://doi.org/10.1101/2021.05.12.443797) of this work.
+* Here is [the paper](https://doi.org/10.1093/genetics/iyac009) of this work.
 * If you want to use the software of this paper refer [here](https://github.com/jthlab/bim). 
 * Cite this paper [here](citation.bib).
 
